@@ -1,0 +1,85 @@
+.example-sidenav,.example-container{
+    height: 100vh;
+}
+
+.sidenav-container { 
+    height: 100%;
+}
+
+
+
+.sidenav { 
+    width: 220px;
+    background-color: #fafafa;
+}
+
+.sidenav .mat-toolbar { 
+    background: inherit;
+}
+
+.mat-toolbar.mat-primary { 
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.icon-user { 
+    height: 32px;
+    width: 32px;
+}
+
+
+.panel{
+    display: flex;
+    flex-direction: column;
+    align-items: initial;
+    margin: 0;
+    width: 50rem;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+strong{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project{
+    border: 1px solid black;
+}
+
+.header_toolbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_title{
+    display: flex;
+    align-items: center;
+}
+.menu-icon { 
+    height: 32px;
+    width: 32px;
+}
+.menu_item{
+    display: flex;
+    align-items: center;
+}
+.menu_user{
+    display: flex;
+    align-items: center;
+}
+.options_header{
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    align-items: center;
+}
+.notification{
+    padding-top: 0.6rem;
+}
