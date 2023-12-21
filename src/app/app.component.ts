@@ -11,6 +11,9 @@ export class AppComponent implements OnInit{
   title = 'XSQL';
   private apiService=inject(ApiService);
   arrayDB!:ObjetNav[];
+  tabs = [
+    { label: 'query', content: 'Content 1' },
+  ];
   ngOnInit(): void {
     this.apiService.getAll("getJsonDatabases").subscribe((res)=>{
       this.arrayDB=res

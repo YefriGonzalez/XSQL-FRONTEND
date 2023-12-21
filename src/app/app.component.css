@@ -1,12 +1,7 @@
-.example-sidenav,.example-container{
-    height: 100vh;
-}
 
 .sidenav-container { 
     height: 100%;
 }
-
-
 
 .sidenav { 
     width: 220px;
@@ -61,6 +56,7 @@ strong{
 .header_title{
     display: flex;
     align-items: center;
+    color: #fff;
 }
 .menu-icon { 
     height: 32px;
@@ -76,10 +72,7 @@ strong{
 }
 .options_header{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     gap: 3rem;
     align-items: center;
-}
-.notification{
-    padding-top: 0.6rem;
 }
