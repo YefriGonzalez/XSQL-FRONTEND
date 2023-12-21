@@ -9,60 +9,36 @@
       </mat-list-item>
 
       <mat-divider></mat-divider>
-      <div >
-        <mat-accordion >
-          <mat-expansion-panel expanded>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">tab</mat-icon>
-                <span [style.fontSize.px]="14"><strong>Bases de datos</strong></span>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <mat-list-item  matTooltipPosition="right">
-              <a class="menu_item" style="text-decoration: none" routerLink="projectHome">
-                <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">table_chart</mat-icon>
-                <span [style.fontSize.px]="14">Dashboard </span>
-              </a>
-            </mat-list-item>
-
-            <mat-list-item  matTooltipPosition="right"
-             >
-              <a class="menu_item" style="text-decoration: none" routerLink="projectHome/assignPersonal">
-                <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">people_outline</mat-icon>
-                <span [style.fontSize.px]="14">Carga de personal</span>
-              </a>
-            </mat-list-item>
-
-            <mat-list-item  matTooltipPosition="right"
-            >
-              <a class="menu_item" style="text-decoration: none" routerLink="projectHome/assignUpmChief">
-                <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">work</mat-icon>
-                <span [style.fontSize.px]="14">Asignacion de UPM</span>
-              </a>
-            </mat-list-item>
-
-            <mat-list-item  matTooltipPosition="right"
-              >
-              <a class="menu_item" style="text-decoration: none" routerLink="projectHome/cartografo">
-                <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">people_outline</mat-icon>
-                <span [style.fontSize.px]="14">Cartografo</span>
-              </a>
-            </mat-list-item>
-
-            <mat-list-item  matTooltipPosition="right"
-              *ngxPermissionsOnly="['ver-equipo-campo']">
-              <a class="menu_item" style="text-decoration: none" routerLink="projectHome/equipo-campo">
-                <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">my_location</mat-icon>
-                <span [style.fontSize.px]="14">Equipo de Campo</span>
-              </a>
-            </mat-list-item>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
+      <mat-accordion >
+        <mat-expansion-panel expanded >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">tab</mat-icon>
+              <span [style.fontSize.px]="14"><strong>Bases de datos</strong></span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-accordion *ngFor="let item of arrayDB">
+            <mat-expansion-panel  expanded>
+              <mat-expansion-panel-header> <mat-panel-title>
+                <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">settings_system_daydream</mat-icon>
+                <span [style.fontSize.px]="14"><strong> {{item.base}}</strong></span>
+              </mat-panel-title></mat-expansion-panel-header>
+             
+              <mat-list-item  *ngFor="let tab of item.tablas">
+                <a class="menu_item" style="text-decoration: none">
+                  <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon">table_chart</mat-icon>
+                  <span [style.fontSize.px]="14">{{tab.nombre}} </span>
+                </a>
+              </mat-list-item>
+            </mat-expansion-panel>
+          </mat-accordion>
+         
+        </mat-expansion-panel>
+      </mat-accordion>
+     
     </mat-nav-list>
   </mat-sidenav>
-
+  
   <mat-sidenav-content style="background-color: white">
 
     <mat-toolbar class="header_toolbar" color="primary" style="z-index: 99" >
@@ -79,15 +55,11 @@
           </button>
         </div>
        
-       
-       
         <button mat-button >
           <span></span>
           <mat-icon>arrow_drop_down</mat-icon>
           <mat-icon>account_circle</mat-icon>
         </button>
-
-       
       </div>
     </mat-toolbar>
     <div style="width: 100%; height: auto">

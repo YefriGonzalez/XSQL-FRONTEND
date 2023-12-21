@@ -23,9 +23,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTooltipModule,
     MatTabsModule,
     MatSortModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
