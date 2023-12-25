@@ -26,10 +26,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
+import { EditorComponent } from './components/editor/editor.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,

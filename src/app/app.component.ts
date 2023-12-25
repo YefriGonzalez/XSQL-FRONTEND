@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { ObjetNav } from './iterfaces/objet-nav';
+import { EditorComponent } from './components/editor/editor.component';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,14 @@ export class AppComponent implements OnInit{
   private apiService=inject(ApiService);
   arrayDB!:ObjetNav[];
   tabs = [
-    { label: 'query', content: 'Content 1' },
+    { label: 'query'},
   ];
   ngOnInit(): void {
     this.apiService.getAll("getJsonDatabases").subscribe((res)=>{
       this.arrayDB=res
     })
+  }
+  newQuery(){
+    this.tabs.push({label:'query'})
   }
 }
