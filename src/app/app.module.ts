@@ -27,12 +27,10 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { EditorComponent } from './components/editor/editor.component';
+import { FormsModule } from '@angular/forms';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidenavComponent,
-    EditorComponent
-  ],
+  declarations: [AppComponent, SidenavComponent, EditorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,9 +55,14 @@ import { EditorComponent } from './components/editor/editor.component';
     MatTabsModule,
     MatSortModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    BrowserModule,
+    FormsModule,
+    MonacoEditorModule.forRoot()
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+   
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

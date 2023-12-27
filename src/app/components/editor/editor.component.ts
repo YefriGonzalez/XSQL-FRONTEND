@@ -1,38 +1,64 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
-
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css'],
 })
-export class EditorComponent {
+
+export class EditorComponent implements OnInit {
+  editorOptions = {theme: 'vs-dark', language: 'sql'};
+  ngOnInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  viewEditor=false;
+  viewEditor = false;
   private apiService = inject(ApiService);
   messagesError: string[] = [];
   messagesOK: string[] = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: string[] = [];
-  executeQuery(text: string) {
-    if (text) {
-      this.viewEditor=false
-      this.apiService.post('compile', { text }).subscribe({
+
+  constructor() {
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+  code: string = '';
+
+  executeQuery() {
+    if (this.code) {
+      this.viewEditor = false;
+      let maxIndex = -1; // Variable para almacenar el índice del elemento con el valor más grande
+      let maxValue = Number.MIN_VALUE;
+      this.apiService.post('compile', { text:this.code }).subscribe({
         next: (res) => {
           this.messagesError = res.error;
           this.messagesOK = res.ok;
-          this.dataSource =new  MatTableDataSource(res.json || []);
-          if (res.json){
-            this.viewEditor=true
+          if (res.json.length>0) {
+            let data = res.json;
+            for (let i = 0; i < data.length; i++) {
+              const currentItem = data[i];
+              const keys = Object.keys(currentItem);
+              keys.forEach((key) => {
+                const value = parseFloat(currentItem[key]);
+                if (!isNaN(value) && value > maxValue) {
+                  maxValue = value; 
+                  maxIndex = i;
+                }
+              });
+            }
+            this.dataSource = new MatTableDataSource(res.json || []);
+            this.viewEditor = true;
             this.displayedColumns = Object.keys(res.json[0]);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           }
-          
         },
         error: (err) => {
           console.log(err);
@@ -48,4 +74,5 @@ export class EditorComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+ 
 }

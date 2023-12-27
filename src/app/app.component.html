@@ -49,42 +49,57 @@
   <mat-sidenav-content style="background-color: white">
     <mat-toolbar class="header_toolbar" color="primary" style="z-index: 99">
       <div class="options_header">
-        <button mat-raised-button [matMenuTriggerFor]="menuarchivo">Archivo</button>
-        <button mat-raised-button [matMenuTriggerFor]="menuAcciones">Herramientas</button>
+        <button mat-raised-button [matMenuTriggerFor]="menuarchivo">
+          Archivo
+        </button>
+        <button mat-raised-button [matMenuTriggerFor]="menuAcciones">
+          Herramientas
+        </button>
       </div>
       <mat-menu #menuarchivo="matMenu">
-        <button mat-menu-item  (click)="newQuery()">
+        <button mat-menu-item (click)="newQuery()">
           <span [style.fontSize.px]="14"> Nuevo</span>
-          <mat-icon></mat-icon>
+          
         </button>
         <button mat-menu-item [routerLink]="['auth/logout']">
           <span [style.fontSize.px]="14">Abrir</span>
-          <mat-icon>exit_to_app</mat-icon>
+         
         </button>
         <button mat-menu-item [routerLink]="['auth/logout']">
           <span [style.fontSize.px]="14">Guardar</span>
-          <mat-icon>exit_to_app</mat-icon>
+        
         </button>
         <button mat-menu-item [routerLink]="['auth/logout']">
           <span [style.fontSize.px]="14">Guardar como</span>
-          <mat-icon>exit_to_app</mat-icon>
+         
         </button>
         <button mat-menu-item [routerLink]="['auth/logout']">
-          <span [style.fontSize.px]="14">Cerrar</span>
-          <mat-icon>exit_to_app</mat-icon>
-        </button> <button mat-menu-item [routerLink]="['auth/logout']">
-          <span [style.fontSize.px]="14">Salir</span>
-          <mat-icon>exit_to_app</mat-icon>
+          <span [style.fontSize.px]="14">Cerrar</span>
+         
+        </button>
+        <button mat-menu-item [routerLink]="['auth/logout']">
+          <span [style.fontSize.px]="14">Salir</span>
         </button>
       </mat-menu>
       <mat-menu #menuAcciones="matMenu">
-
+        <button mat-menu-item [routerLink]="['auth/logout']">
+          <span [style.fontSize.px]="14">Bases de datos</span>
+        </button>
+        <button mat-menu-item [routerLink]="['auth/logout']">
+          <span [style.fontSize.px]="14">SQL</span>
+        </button>
+        <button mat-menu-item [routerLink]="['auth/logout']">
+          <span [style.fontSize.px]="14">Exportar</span>
+        </button>
+        <button mat-menu-item [routerLink]="['auth/logout']">
+          <span [style.fontSize.px]="14">Importar</span>
+        </button>
       </mat-menu>
     </mat-toolbar>
     <div style="width: 100%; height: auto">
       <mat-tab-group>
         <mat-tab *ngFor="let tab of tabs" [label]="tab.label">
-          <app-editor/>
+          <app-editor />
         </mat-tab>
       </mat-tab-group>
     </div>

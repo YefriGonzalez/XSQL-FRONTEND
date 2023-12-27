@@ -1,13 +1,15 @@
+
 <div class="w-full h-full">
   <div class="flex align-items-center flex-column mr-4 ml-4 mt-2 h-22rem">
-    <mat-form-field class="w-full h-full">
-      <mat-label>Ingrese las instrucciones.......</mat-label>
-      <textarea rows="10" class="w-full h-full" #input matInput></textarea>
-    </mat-form-field>
+ 
+    <ngx-monaco-editor style="height: 20rem; width: 100%;"
+    [options]="editorOptions"
+    [(ngModel)]="code" >
+    </ngx-monaco-editor>
     <button
       mat-icon-button
       matTooltip="Ejecutar"
-      (click)="executeQuery(input.value)"
+      (click)="executeQuery()"
     >
       <mat-icon>play_arrow</mat-icon>
     </button>
@@ -54,8 +56,10 @@
           *matRowDef="let row; columns: displayedColumns"
         ></tr>
         <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No hay resultados para "{{input2.value}}"</td>
-          </tr>
+          <td class="mat-cell" colspan="4">
+            No hay resultados para "{{ input2.value }}"
+          </td>
+        </tr>
       </table>
       <mat-paginator
         [pageSizeOptions]="[5, 10, 25, 100]"
