@@ -8,10 +8,10 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css'],
 })
-
 export class EditorComponent implements OnInit {
-  editorOptions = {theme: 'vs-dark', language: 'sql'};
+  editorOptions = {  };
   ngOnInit(): void {
+    this.editorOptions={theme: 'vs-dark', language: 'sql'}
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -36,11 +36,14 @@ export class EditorComponent implements OnInit {
       this.viewEditor = false;
       let maxIndex = -1; // Variable para almacenar el índice del elemento con el valor más grande
       let maxValue = Number.MIN_VALUE;
-      this.apiService.post('compile', { text:this.code }).subscribe({
+      this.messagesError = [];
+      this.messagesOK = [];
+      this.dataSource = new MatTableDataSource();
+      this.apiService.post('compile', { text: this.code }).subscribe({
         next: (res) => {
           this.messagesError = res.error;
           this.messagesOK = res.ok;
-          if (res.json.length>0) {
+          if (res.json.length > 0) {
             let data = res.json;
             for (let i = 0; i < data.length; i++) {
               const currentItem = data[i];
@@ -48,7 +51,7 @@ export class EditorComponent implements OnInit {
               keys.forEach((key) => {
                 const value = parseFloat(currentItem[key]);
                 if (!isNaN(value) && value > maxValue) {
-                  maxValue = value; 
+                  maxValue = value;
                   maxIndex = i;
                 }
               });
@@ -74,5 +77,4 @@ export class EditorComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
- 
 }

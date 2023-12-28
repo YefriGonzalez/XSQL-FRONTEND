@@ -28,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { EditorComponent } from './components/editor/editor.component';
 import { FormsModule } from '@angular/forms';
-import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2';
+
 @NgModule({
   declarations: [AppComponent, SidenavComponent, EditorComponent],
   imports: [
