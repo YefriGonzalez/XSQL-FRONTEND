@@ -82,12 +82,15 @@ export class EditorComponent implements OnInit {
 
   createFile(){
     const data: any[] = this.dataSource.data;
-    const date=new Date().toISOString()
-    const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(data);
-
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Hoja1');
-
-    XLSX.writeFile(workbook, `export-${date}.xlsx`);
+    if (data.length>0){
+      const date=new Date().toISOString()
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(data);
+  
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Hoja1');
+  
+      XLSX.writeFile(workbook, `export-${date}.xlsx`);
+    }
+    
   }
 }
