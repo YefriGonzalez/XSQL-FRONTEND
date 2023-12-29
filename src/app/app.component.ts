@@ -1,8 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { ObjetNav } from './iterfaces/objet-nav';
 import { EditorComponent } from './components/editor/editor.component';
-import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +10,7 @@ import { Observable, Observer } from 'rxjs';
 })
 
 export class AppComponent implements OnInit{
+  @ViewChildren('editors') editors!: QueryList<EditorComponent>;
   title = 'XSQL';
   private apiService=inject(ApiService);
   arrayDB!:ObjetNav[];
@@ -28,5 +28,12 @@ export class AppComponent implements OnInit{
   }
   newQuery(){
     this.tabs.push({label:'query',content: EditorComponent})
+  }
+  generateFile(index:any): void {
+    const selectedEditor = this.editors.toArray()[index];
+    if (selectedEditor) {
+      console.log("sELETECT")
+      selectedEditor.createFile();
+    }
   }
 }

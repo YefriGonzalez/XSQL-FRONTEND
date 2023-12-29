@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -61,6 +62,7 @@ export class EditorComponent implements OnInit {
             this.displayedColumns = Object.keys(res.json[0]);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            window.open(`http://127.0.0.1:8000/static/${res.nameAst}`, '_blank');
           }
         },
         error: (err) => {
@@ -76,5 +78,16 @@ export class EditorComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  createFile(){
+    const data: any[] = this.dataSource.data;
+    const date=new Date().toISOString()
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(data);
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Hoja1');
+
+    XLSX.writeFile(workbook, `export-${date}.xlsx`);
   }
 }
