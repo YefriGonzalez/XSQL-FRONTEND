@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,9 +17,10 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
-  editorOptions = {  };
+  editorOptions = {};
+  @Output() senalAlPadre = new EventEmitter<void>();
   ngOnInit(): void {
-    this.editorOptions={theme: 'vs-dark', language: 'sql'}
+    this.editorOptions = { theme: 'vs-dark', language: 'sql' };
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -59,10 +67,18 @@ export class EditorComponent implements OnInit {
             }
             this.dataSource = new MatTableDataSource(res.json || []);
             this.viewEditor = true;
-            this.displayedColumns = Object.keys(res.json[0]);
+            this.displayedColumns = Object.keys(res.json[maxIndex]);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
-            window.open(`http://127.0.0.1:8000/static/${res.nameAst}`, '_blank');
+           
+           
+          }
+          if (res.ok.length>0){
+            window.open(
+              `http://127.0.0.1:8000/static/${res.nameAst}`,
+              '_blank'
+            );
+            this.senalAlPadre.emit()
           }
         },
         error: (err) => {
@@ -80,17 +96,16 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  createFile(){
+  createFile() {
     const data: any[] = this.dataSource.data;
-    if (data.length>0){
-      const date=new Date().toISOString()
+    if (data.length > 0) {
+      const date = new Date().toISOString();
       const workbook = XLSX.utils.book_new();
       const worksheet = XLSX.utils.json_to_sheet(data);
-  
+
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Hoja1');
-  
+
       XLSX.writeFile(workbook, `export-${date}.xlsx`);
     }
-    
   }
 }

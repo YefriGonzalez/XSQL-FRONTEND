@@ -23,7 +23,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { EditorComponent } from './components/editor/editor.component';
@@ -31,7 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2';
 
 @NgModule({
-  declarations: [AppComponent, SidenavComponent, EditorComponent],
+  declarations: [AppComponent, EditorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

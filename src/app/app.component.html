@@ -19,18 +19,30 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-accordion *ngFor="let item of arrayDB">
-            <mat-expansion-panel expanded>
+            <mat-expansion-panel
+              expanded
+            >
               <mat-expansion-panel-header>
-                <mat-panel-title>
+                <mat-panel-title  >
                   <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon"
                     >settings_system_daydream</mat-icon
                   >
                   <span [style.fontSize.px]="14"
                     ><strong> {{ item.base }}</strong></span
                   >
-                </mat-panel-title></mat-expansion-panel-header
-              >
-
+                  <button mat-icon-button [mat-menu-trigger-for]="menuBar">
+                    <mat-icon>settings</mat-icon>
+                  </button>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-menu #menuBar="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="generateDump(item.base)"
+                >
+                  Generar Dump
+                </button>
+              </mat-menu>
               <mat-list-item *ngFor="let tab of item.tablas">
                 <a class="menu_item" style="text-decoration: none">
                   <mat-icon [style.fontSize.px]="25" class="routeIcon menu-icon"
@@ -46,6 +58,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
+  
   <mat-sidenav-content style="background-color: white">
     <mat-toolbar class="header_toolbar" color="primary" style="z-index: 99">
       <div class="options_header">
@@ -57,50 +70,44 @@
         </button>
       </div>
       <mat-menu #menuarchivo="matMenu">
-        <button mat-menu-item (click)="newQuery()">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14"> Nuevo</span>
-          
         </button>
-        <button mat-menu-item [routerLink]="['auth/logout']">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14">Abrir</span>
-         
         </button>
-        <button mat-menu-item [routerLink]="['auth/logout']">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14">Guardar</span>
-        
         </button>
-        <button mat-menu-item [routerLink]="['auth/logout']">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14">Guardar como</span>
-         
         </button>
-        <button mat-menu-item [routerLink]="['auth/logout']">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14">Cerrar</span>
-         
         </button>
-        <button mat-menu-item [routerLink]="['auth/logout']">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14">Salir</span>
         </button>
       </mat-menu>
       <mat-menu #menuAcciones="matMenu">
-        <button mat-menu-item [routerLink]="['auth/logout']">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14">Bases de datos</span>
         </button>
-        <button mat-menu-item [routerLink]="['auth/logout']">
-          <span [style.fontSize.px]="14">SQL</span>
+        <button mat-menu-item (click)="newQuery()">
+          <span [style.fontSize.px]="14" >SQL</span>
         </button>
         <button mat-menu-item (click)="generateFile(group.selectedIndex)">
           <span [style.fontSize.px]="14">Exportar</span>
         </button>
-        <button mat-menu-item [routerLink]="['auth/logout']">
+        <button mat-menu-item >
           <span [style.fontSize.px]="14">Importar</span>
         </button>
       </mat-menu>
     </mat-toolbar>
     <div style="width: 100%; height: auto">
       <mat-tab-group animationDuration="700ms" #group>
-    
-        <mat-tab *ngFor="let tab of  tabs" [label]="tab.label" >
-          <app-editor #editors/>
+        <mat-tab *ngFor="let tab of tabs" [label]="tab.label">
+          <app-editor (senalAlPadre)="recargarPeticion()" #editors />
         </mat-tab>
       </mat-tab-group>
     </div>
