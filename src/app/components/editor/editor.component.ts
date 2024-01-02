@@ -43,7 +43,7 @@ export class EditorComponent implements OnInit {
   executeQuery() {
     if (this.code) {
       this.viewEditor = false;
-      let maxIndex = -1; // Variable para almacenar el índice del elemento con el valor más grande
+      let maxIndex = 0; // Variable para almacenar el índice del elemento con el valor más grande
       let maxValue = Number.MIN_VALUE;
       this.messagesError = [];
       this.messagesOK = [];
@@ -70,8 +70,6 @@ export class EditorComponent implements OnInit {
             this.displayedColumns = Object.keys(res.json[maxIndex]);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
-           
-           
           }
           if (res.ok.length>0){
             window.open(
