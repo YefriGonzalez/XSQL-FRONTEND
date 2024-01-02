@@ -29,9 +29,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.chargeJson()
+    this.chargeJson();
   }
-  chargeJson(){
+  chargeJson() {
     this.apiService.getAll('getJsonDatabases').subscribe((res) => {
       this.arrayDB = res;
     });
@@ -60,6 +60,29 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
   recargarPeticion() {
-   this.chargeJson()
+    this.chargeJson();
+  }
+
+  viewFile(type: number) {
+    switch (type) {
+      case 1:
+        window.open(
+          `http://127.0.0.1:8000/static/Manual Tecnico.pdf`,
+          '_blank'
+        );
+        break;
+      case 2:
+        window.open(
+          `http://127.0.0.1:8000/static/Manual de Usuario.pdf`,
+          '_blank'
+        );
+        break;
+      case 3:
+        window.open(
+          `http://127.0.0.1:8000/static/Gramaticas.txt`,
+          '_blank'
+        );
+        break;
+    }
   }
 }

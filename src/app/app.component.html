@@ -68,6 +68,15 @@
         <button mat-raised-button [matMenuTriggerFor]="menuAcciones">
           Herramientas
         </button>
+        <button mat-raised-button (click)="viewFile(1)">
+          Ver manual tecnico
+        </button>
+        <button mat-raised-button (click)="viewFile(2)">
+          Ver manual de usuario
+        </button>
+        <button mat-raised-button (click)="viewFile(3)">
+          Ver gramaticas
+        </button>
       </div>
       <mat-menu #menuarchivo="matMenu">
         <button mat-menu-item >
