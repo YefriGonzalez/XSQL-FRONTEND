@@ -71,11 +71,17 @@ export class EditorComponent implements OnInit {
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           }
-          if (res.ok.length>0){
-            window.open(
+          if (res.ok.length>0 || res.json.length > 0){
+            const pest=window.open(
               `http://127.0.0.1:8000/static/${res.nameAst}`,
-              '_blank'
+              '',
+              'location=no,toolbar=no,status=no,menubar=no,resizable=yes,scrollbars=yes,width=500,height=300,target=_blank'
             );
+            if (pest) {
+              
+              pest.blur(); // Coloca la nueva pestaña en segundo plano
+              window.focus(); // Devuelve el foco a la ventana actual
+            }
             this.senalAlPadre.emit()
           }
         },
